@@ -4,7 +4,6 @@ from tkinter import *
 import tkinter as tk
 import SplitAndCat
 
-filename = ""
 
 def get_filename():
     global filename

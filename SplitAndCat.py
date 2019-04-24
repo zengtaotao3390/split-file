@@ -1,6 +1,8 @@
 from os import walk
 import os
 import ntpath
+import shutil
+
 
 def split_file(file, max_size, buffer=512 * 1024):
     """
@@ -12,8 +14,9 @@ def split_file(file, max_size, buffer=512 * 1024):
     Returns the number of parts created.
     """
     split_dir = file + "-split-file/"
-    if not os.path.isdir(split_dir):
-        os.mkdir(split_dir)
+    if os.path.isdir(split_dir):
+        shutil.rmtree(split_dir)
+    os.mkdir(split_dir)
     path, filename = ntpath.split(file)
     prefix = split_dir + filename
     with open(file, 'r+b') as src:
@@ -59,6 +62,6 @@ def cat_files(files_dir, outfile, buffer=1024):
 
 if __name__ == '__main__':
     open_file = 'C:/Users/zengtao/Desktop/lijiu.vsd'
-    prefix = 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd'
+    # prefix = 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd'
     # split_file(open_file, prefix, 10240)
     cat_files('C:/Users/zengtao/Desktop/splits_file', 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd')
