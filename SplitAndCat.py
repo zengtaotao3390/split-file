@@ -2,9 +2,10 @@ from os import walk
 import os
 import ntpath
 import shutil
+import time
 
 
-def split_file(file, max_size, buffer=512 * 1024):
+def split_file(file, max_size, progress_bar, buffer= 40 * 1024 * 1024):
     """
     file: the input file
     prefix: prefix of the output files that will be created
@@ -33,7 +34,8 @@ def split_file(file, max_size, buffer=512 * 1024):
                     data = src.read(buffer)
                     if data:
                         writen_count += buffer
-                        yield writen_count
+                        progress_bar['value'] = writen_count
+                        print(writen_count)
                         tgt.write(data)
                         written += buffer
                     else:
