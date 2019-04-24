@@ -3,9 +3,6 @@ from tkinter.filedialog import askopenfilename
 from tkinter import *
 import tkinter as tk
 
-# filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
-# print(filename)
-
 
 def get_filename():
     filename = askopenfilename()
