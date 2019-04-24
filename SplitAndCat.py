@@ -1,7 +1,8 @@
 from os import walk
+import os
+import ntpath
 
-
-def split_file(file, prefix, max_size, buffer=1024*1024):
+def split_file(file, max_size, buffer=512 * 1024):
     """
     file: the input file
     prefix: prefix of the output files that will be created
@@ -10,6 +11,11 @@ def split_file(file, prefix, max_size, buffer=1024*1024):
 
     Returns the number of parts created.
     """
+    split_dir = file + "-split-file/"
+    if not os.path.isdir(split_dir):
+        os.mkdir(split_dir)
+    path, filename = ntpath.split(file)
+    prefix = split_dir + filename
     with open(file, 'r+b') as src:
         suffix = 0
         while True:

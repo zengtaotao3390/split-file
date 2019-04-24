@@ -4,8 +4,10 @@ from tkinter import *
 import tkinter as tk
 import SplitAndCat
 
+filename = ""
 
 def get_filename():
+    global filename
     filename = askopenfilename()
     print(filename)
     text_fragment_file.delete(1.0, END)
@@ -13,9 +15,9 @@ def get_filename():
 
 
 def split_file():
-    size = int(entry_fragment_size.get())
-    SplitAndCat.split_file()
-
+    size = int(entry_fragment_size.get()) * 1024 * 1024
+    print(filename)
+    SplitAndCat.split_file(filename, size)
 
 
 r = Tk()
