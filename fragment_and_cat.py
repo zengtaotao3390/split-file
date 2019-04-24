@@ -1,5 +1,6 @@
 from os import walk
 
+
 def split_file(file, prefix, max_size, buffer=1024*1024):
     """
     file: the input file
@@ -26,6 +27,7 @@ def split_file(file, prefix, max_size, buffer=1024*1024):
                     else:
                         return suffix
                 suffix += 1
+
 
 # 分割成一百以内的都可以
 def cat_files(files_dir, outfile, buffer=1024):
