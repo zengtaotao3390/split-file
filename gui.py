@@ -3,7 +3,8 @@ from tkinter.filedialog import askopenfilename
 from tkinter import *
 import tkinter as tk
 import SplitAndCat
-
+from tkinter import ttk
+import os
 
 def get_filename():
     global filename
@@ -15,8 +16,12 @@ def get_filename():
 
 def split_file():
     size = int(entry_fragment_size.get()) * 1024 * 1024
-    print(filename)
-    SplitAndCat.split_file(filename, size)
+    maximum = os.path.getsize(filename)
+    progress_bar['maximum'] = maximum
+    progress_bar['value'] = 0
+    for writen_count in SplitAndCat.split_file(filename, size):
+        print(writen_count)
+        progress_bar['value'] = writen_count
 
 
 r = Tk()
@@ -31,6 +36,9 @@ button_select_file = tk.Button(r, text='选择文件', width=10, command=get_fil
 button_select_file.grid(row=1, column=1)
 button_start = tk.Button(r, text='开始分割', width=10, command=split_file, fg="red")
 button_start.grid(row=2, column=1)
+progress_bar = ttk.Progressbar(r, orient='horizontal', length=250, mode='determinate')
+progress_bar.grid(row=2, column=0)
+progress_bar['value'] = 0
 
 r.mainloop()
 

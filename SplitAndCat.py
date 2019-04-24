@@ -19,6 +19,7 @@ def split_file(file, max_size, buffer=512 * 1024):
     os.mkdir(split_dir)
     path, filename = ntpath.split(file)
     prefix = split_dir + filename
+    writen_count = 0
     with open(file, 'r+b') as src:
         suffix = 0
         while True:
@@ -31,6 +32,8 @@ def split_file(file, max_size, buffer=512 * 1024):
                 while written < max_size:
                     data = src.read(buffer)
                     if data:
+                        writen_count += buffer
+                        yield writen_count
                         tgt.write(data)
                         written += buffer
                     else:
