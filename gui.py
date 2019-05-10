@@ -55,7 +55,7 @@ if __name__ == '__main__':
     text_split_file = Text(r, height=5, width=30)
     text_split_file.grid(row=1, column=0)
 
-    button_select_file = tk.Button(r, text='选择文件', width=10, command=get_split_filename, fg="red")
+    button_select_file = tk.Button(r, text='选择分割文件', width=10, command=get_split_filename, fg="red")
     button_select_file.grid(row=1, column=1)
 
     button_start = tk.Button(r, text='开始分割', width=10, command=split_file, fg="red")
