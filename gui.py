@@ -75,7 +75,7 @@ if __name__ == '__main__':
     cat_progress_bar.grid(row=4, column=0)
     cat_progress_bar['value'] = 0
 
-    button_select_cat_file = tk.Button(r, text='合并文件', width=10, command=cat_files, fg="red")
+    button_select_cat_file = tk.Button(r, text='开始合并', width=10, command=cat_files, fg="red")
     button_select_cat_file.grid(row=4, column=1)
 
     r.mainloop()
