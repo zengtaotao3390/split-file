@@ -2,10 +2,9 @@ from os import walk
 import os
 import ntpath
 import shutil
-import time
 
 
-def split_file(file, max_size, progress_bar, buffer=1024):
+def split_file(file, max_size, progress_bar, buffer=4 * 1024 * 1024):
     """
     file: the input file
     prefix: prefix of the output files that will be created
@@ -24,7 +23,7 @@ def split_file(file, max_size, progress_bar, buffer=1024):
     with open(file, 'r+b') as src:
         suffix = 0
         while True:
-            if(suffix < 10):
+            if (suffix < 10):
                 suffix_str = '0' + str(suffix)
             else:
                 suffix_str = str(suffix)
