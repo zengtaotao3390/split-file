@@ -5,7 +5,7 @@ import shutil
 import time
 
 
-def split_file(file, max_size, progress_bar, buffer= 40 * 1024 * 1024):
+def split_file(file, max_size, progress_bar, buffer=1024):
     """
     file: the input file
     prefix: prefix of the output files that will be created
@@ -44,22 +44,28 @@ def split_file(file, max_size, progress_bar, buffer= 40 * 1024 * 1024):
 
 
 # 分割成一百以内的都可以
-def cat_files(files_dir, outfile, buffer=1024):
+def cat_files(files_dir, progress_bar, buffer=40 * 1024 * 1024):
     """
     infiles: a list of files
     outfile: the file that will be created
     buffer: buffer size in bytes
     """
+
     f = []
     for (dirpath, dirnames, filenames) in walk(files_dir):
         for filename in filenames:
             f.append(dirpath + "/" + filename)
+    outfile = f[0].split(".00")[0]
+    read_count = 0
     with open(outfile, 'w+b') as tgt:
         for infile in sorted(f):
             with open(infile, 'r+b') as src:
                 while True:
                     data = src.read(buffer)
                     if data:
+                        read_count += buffer
+                        print(read_count)
+                        progress_bar['value'] = read_count
                         tgt.write(data)
                     else:
                         break
@@ -69,4 +75,4 @@ if __name__ == '__main__':
     open_file = 'C:/Users/zengtao/Desktop/lijiu.vsd'
     # prefix = 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd'
     # split_file(open_file, prefix, 10240)
-    cat_files('C:/Users/zengtao/Desktop/splits_file', 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd')
+    # cat_files('C:/Users/zengtao/Desktop/splits_file', 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd')
