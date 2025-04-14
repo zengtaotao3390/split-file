@@ -71,6 +71,7 @@ def cat_files(files_dir, progress_bar, buffer=40 * 1024 * 1024):
 
 
 if __name__ == '__main__':
+    print("123")
     open_file = 'C:/Users/zengtao/Desktop/lijiu.vsd'
     # prefix = 'C:/Users/zengtao/Desktop/splits_file/lijiu.vsd'
     # split_file(open_file, prefix, 10240)
